@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'fa' => array_key_exists('fa', $data) ? $data['fa'] : false,
             'capture' => array_key_exists('capture', $data) ? $data['capture'] : false,
             'feeding' => array_key_exists('feeding', $data) ? $data['feeding'] : false,
-            'member' => array_key_exists('member', $data) ? $data['member '] : false,
+            'member' => array_key_exists('member', $data) ? $data['member'] : false,
         );
 
         return User::create($formatData);
