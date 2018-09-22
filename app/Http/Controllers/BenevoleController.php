@@ -76,8 +76,6 @@ class BenevoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dump($request->all());
-//        exit;
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required',
