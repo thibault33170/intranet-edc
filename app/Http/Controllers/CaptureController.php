@@ -11,20 +11,37 @@ use Validator;
 
 class CaptureController extends Controller
 {
+    /** @var Capture */
+    private $capture;
+
+    /** @var User */
+    private $user;
+
     /**
-     * Display a listing of the resource.
+     * CaptureController constructor.
+     * @param Capture $capture
+     * @param User $user
+     */
+    public function __construct(Capture $capture, User $user)
+    {
+        $this->capture = $capture;
+        $this->user = $user;
+    }
+
+    /**
+     * Display a listing of the capture.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $captures = Capture::all();
+        $captures = $this->capture->all();
 
         return view('pages.capture.index')->with('captures', $captures);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new capture.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,7 +51,7 @@ class CaptureController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created capture in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -53,34 +70,34 @@ class CaptureController extends Controller
                 ->withInput();
         }
 
-        $capture = Capture::create($request->all());
+        $capture = $this->capture->create($request->all());
 
         return Redirect::route('captures.edit', array($capture->id));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified capture.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $capture = Capture::find($id);
+        $capture = $this->capture->find($id);
 
         return view('pages.capture.show')->with('capture', $capture);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified capture.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $capture = Capture::find($id);
-        $benevoles = User::all();
+        $capture = $this->capture->find($id);
+        $benevoles = $this->user->all();
 
         return view('pages.capture.edit')
             ->with('capture', $capture)
@@ -88,7 +105,7 @@ class CaptureController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified capture in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
@@ -108,25 +125,14 @@ class CaptureController extends Controller
                 ->withInput();
         }
 
-        Capture::find($id)->update($request->all());
+        $this->capture->find($id)->update($request->all());
 
         return Redirect::route('captures.show', array($id));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function attach(Request $request)
     {
-        $capture = Capture::find($request->input('capture_id'));
+        $capture = $this->capture->find($request->input('capture_id'));
 
         $capture->users()->attach($request->input('user_id'));
 
@@ -135,7 +141,7 @@ class CaptureController extends Controller
 
     public function detach(Request $request)
     {
-        $capture = Capture::find($request->input('capture_id'));
+        $capture = $this->capture->find($request->input('capture_id'));
 
         $capture->users()->detach($request->input('user_id'));
 

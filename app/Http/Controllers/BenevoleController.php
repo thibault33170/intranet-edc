@@ -10,65 +10,56 @@ use Validator;
 
 class BenevoleController extends Controller
 {
+    /** @var User */
+    private $user;
+
     /**
-     * Display a listing of the resource.
+     * BenevoleController constructor.
+     * @param User $user
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * Display a listing of the benevoles.
      *
      * @return Response
      */
     public function index()
     {
-        $benevoles = User::all();
+        $benevoles = $this->user->all();
         return view('pages.benevole.index')->with('benevoles', $benevoles);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Display the specified benevole.
      *
      * @param  int $id
      * @return Response
      */
     public function show($id)
     {
-        $benevole = User::find($id);
+        $benevole = $this->user->find($id);
 
         return view('pages.benevole.show')->with('benevole', $benevole);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified benevole.
      *
      * @param  int $id
      * @return Response
      */
     public function edit($id)
     {
-        $benevole = User::find($id);
+        $benevole = $this->user->find($id);
         return view('pages.benevole.edit')->with('benevole', $benevole);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified benevole in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
@@ -92,19 +83,8 @@ class BenevoleController extends Controller
                 ->withInput();
         }
 
-        User::find($id)->update($request->all());
+        $this->user->find($id)->update($request->all());
 
         return Redirect::route('benevoles.show', array($id))->with('status', 'Bénévole mis à jour');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
