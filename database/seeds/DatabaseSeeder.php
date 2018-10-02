@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         /** @var Permission $permission */
         $permission = Permission::create(['name' => 'edit articles']);
 
-        factory(App\User::class, 5000)->create()->each(function (User $user) use ($role, $permission) {
+        factory(App\User::class, 200)->create()->each(function (User $user) use ($role, $permission) {
             $user->assignRole($role);
             $user->givePermissionTo($permission);
         });

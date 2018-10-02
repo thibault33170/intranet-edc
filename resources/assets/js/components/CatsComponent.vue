@@ -8,13 +8,13 @@
             </div>
         </div>
         <div class="row">
-            <div v-for="capture in filteredCaptures">
-                <a style="text-decoration: none; color: grey" :href="'/captures/' + capture.id">
+            <div v-for="cat in filteredCats">
+                <a style="text-decoration: none; color: grey" :href="'/cats/' + cat.id">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="panel panel-default">
                             <div class="panel-body text-center">
-                                <h1>{{ capture.city }}</h1>
-                                <h5>{{ formatedDate(capture.date) }}</h5>
+                                <h1>{{ cat.name }}</h1>
+                                <h5>{{ formatedDate(cat.dob) }}</h5>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
     import moment from 'moment'
 
     export default {
-        props: ['captures'],
+        props: ['cats'],
 
         data() {
             return {
@@ -46,12 +46,12 @@
         },
 
         computed: {
-            filteredCaptures() {
-                return this.captures.filter(capture => {
+            filteredCats() {
+                return this.cats.filter(cat => {
                     if (this.search === '')
-                        return capture
+                        return cat
 
-                    return capture.city.toLowerCase().indexOf(this.search.toLowerCase()) >= 0
+                    return cat.name.toLowerCase().indexOf(this.search.toLowerCase()) >= 0
                 })
             }
         }
