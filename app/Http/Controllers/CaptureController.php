@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Capture;
 use App\User;
-use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Validator;
 
 class CaptureController extends Controller
@@ -26,8 +24,7 @@ class CaptureController extends Controller
      * @param Capture $capture
      * @param User $user
      */
-    public function __construct(Capture $capture, User $user)
-    {
+    public function __construct(Capture $capture, User $user) {
         $this->capture = $capture;
         $this->user = $user;
     }
@@ -37,8 +34,7 @@ class CaptureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $captures = $this->capture->all();
 
         return view('pages.capture.index')->with('captures', $captures);
@@ -49,8 +45,7 @@ class CaptureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('pages.capture.create');
     }
 
@@ -58,15 +53,17 @@ class CaptureController extends Controller
      * Store a newly created capture in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'city' => 'required',
-            'address' => 'required',
-            'date' => 'required|date|date_format:Y-m-d|after:now',
-        ]);
+    public function store(Request $request) {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'city' => 'required',
+                'address' => 'required',
+                'date' => 'required|date|date_format:Y-m-d|after:now',
+            ]
+        );
 
         if ($validator->fails()) {
             return back()
@@ -76,7 +73,7 @@ class CaptureController extends Controller
 
         $capture = $this->capture->create($request->all());
 
-        return Redirect::route('captures.edit', array($capture->id));
+        return redirect()->route('captures.edit', array($capture->id));
     }
 
     /**
@@ -85,8 +82,7 @@ class CaptureController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         $capture = $this->capture->find($id);
 
         return view('pages.capture.show')->with('capture', $capture);
@@ -98,8 +94,7 @@ class CaptureController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         $capture = $this->capture->find($id);
         $benevoles = $this->user->all();
 
@@ -113,15 +108,17 @@ class CaptureController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'city' => 'required',
-            'address' => 'required',
-            'date' => 'required|date|date_format:Y-m-d|after:now',
-        ]);
+    public function update(Request $request, $id) {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'city' => 'required',
+                'address' => 'required',
+                'date' => 'required|date|date_format:Y-m-d|after:now',
+            ]
+        );
 
         if ($validator->fails()) {
             return back()
@@ -131,11 +128,10 @@ class CaptureController extends Controller
 
         $this->capture->find($id)->update($request->all());
 
-        return Redirect::route('captures.show', array($id));
+        return redirect()->route('captures.show', array($id));
     }
 
-    public function attach(Request $request)
-    {
+    public function attach(Request $request) {
         $capture = $this->capture->find($request->input('capture_id'));
 
         $capture->users()->attach($request->input('user_id'));
@@ -143,8 +139,7 @@ class CaptureController extends Controller
         return back()->with('status', 'Participation prise en compte');
     }
 
-    public function detach(Request $request)
-    {
+    public function detach(Request $request) {
         $capture = $this->capture->find($request->input('capture_id'));
 
         $capture->users()->detach($request->input('user_id'));

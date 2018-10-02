@@ -15,8 +15,7 @@ class CatController extends Controller
      * CatController constructor.
      * @param Cat $cat
      */
-    public function __construct(Cat $cat)
-    {
+    public function __construct(Cat $cat) {
         $this->cat = $cat;
     }
 
@@ -25,8 +24,7 @@ class CatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $cats = $this->cat->all();
 
         return view('pages.cats.index')
