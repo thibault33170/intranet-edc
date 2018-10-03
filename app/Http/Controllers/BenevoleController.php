@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BenevoleUpdateRequest;
 use App\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Validator;
 
 class BenevoleController extends Controller
 {
@@ -61,30 +60,11 @@ class BenevoleController extends Controller
     /**
      * Update the specified benevole in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int $id
+     * @param BenevoleUpdateRequest $request
      * @return RedirectResponse
      */
-    public function update(Request $request, $id) {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'name' => 'required',
-                'email' => 'required',
-                'dob' => 'date|date_format:Y-m-d|before:now',
-                'fa' => 'required|boolean',
-                'capture' => 'required|boolean',
-                'feeding' => 'required|boolean',
-                'member' => 'required|boolean',
-            ]
-        );
-
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
+    public function update($id, BenevoleUpdateRequest $request) {
         $this->user->find($id)->update($request->all());
 
         return redirect()->route('benevoles.show', array($id))->with('status', 'Bénévole mis à jour');

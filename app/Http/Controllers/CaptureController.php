@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Capture;
+use App\Http\Requests\CaptureStoreRequest;
+use App\Http\Requests\CaptureUpdateRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -52,25 +54,10 @@ class CaptureController extends Controller
     /**
      * Store a newly created capture in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param CaptureStoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request) {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'city' => 'required',
-                'address' => 'required',
-                'date' => 'required|date|date_format:Y-m-d|after:now',
-            ]
-        );
-
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
+    public function store(CaptureStoreRequest $request) {
         $capture = $this->capture->create($request->all());
 
         return redirect()->route('captures.edit', array($capture->id));
@@ -106,26 +93,11 @@ class CaptureController extends Controller
     /**
      * Update the specified capture in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int $id
+     * @param CaptureUpdateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id) {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'city' => 'required',
-                'address' => 'required',
-                'date' => 'required|date|date_format:Y-m-d|after:now',
-            ]
-        );
-
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
+    public function update($id, CaptureUpdateRequest $request) {
         $this->capture->find($id)->update($request->all());
 
         return redirect()->route('captures.show', array($id));
