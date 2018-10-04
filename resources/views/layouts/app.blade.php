@@ -38,13 +38,19 @@
                     <ul class="nav navbar-nav">
                         &nbsp;<li>
                             <a href="{{ route('register') }}">
-                                Créer un bénévole
+                                Ajouter un bénévole
                             </a>
                         </li>
 
                         &nbsp;<li>
                             <a href="{{ route('captures.create') }}">
-                                Créer une capture
+                                Ajouter une capture
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('cats.create') }}">
+                                Ajouter un chat
                             </a>
                         </li>
                     </ul>

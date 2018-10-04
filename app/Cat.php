@@ -24,5 +24,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cat extends Model
 {
+    protected $dates = [
+        'dob',
+    ];
 
+    protected $fillable = [
+        'name',
+        'color',
+        'dob',
+    ];
 }
