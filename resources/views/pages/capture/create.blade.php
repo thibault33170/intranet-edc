@@ -14,6 +14,8 @@
             <form action="{{ route('captures.store') }}" method="POST">
                 <input type="hidden" name="_method" value="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+
                 <div class="form-group">
                     <label for="city">Ville</label>
                     <input type="text" class="form-control" id="city" name="city" placeholder="Ville" value="{{ old('city') }}">
@@ -24,6 +26,14 @@
                     <label for="address">Adresse</label>
                     <textarea rows="3" class="form-control" id="address" name="address" placeholder="Adresse">
                         {{ old('address') }}
+                    </textarea>
+                    <span class="help-block" style="color: red;">{{ $errors->first('address') }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="informations">Adresse</label>
+                    <textarea rows="3" class="form-control" id="informations" name="information" placeholder="Informations">
+                        {{ old('information') }}
                     </textarea>
                     <span class="help-block" style="color: red;">{{ $errors->first('address') }}</span>
                 </div>
