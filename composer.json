@@ -9,7 +9,7 @@
         "barryvdh/laravel-ide-helper": "^2.5",
         "doctrine/dbal": "^2.8",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
         "spatie/laravel-permission": "^2.7"
     },
