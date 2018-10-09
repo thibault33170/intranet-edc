@@ -12,21 +12,38 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         /** @var Role $role */
         $role = Role::create(['name' => 'admin']);
 
-        /** @var Permission $permission */
-        $permission = Permission::create(['name' => 'edit articles']);
+        Permission::create([
+            "name" => "add benevole"
+        ]);
 
-        factory(App\User::class, 200)->create()->each(function (User $user) use ($role, $permission) {
-            $user->assignRole($role);
-            $user->givePermissionTo($permission);
-        });
+        Permission::create([
+            "name" => "add capture"
+        ]);
 
-        factory(App\Capture::class, 40 )->create();
+        Permission::create([
+            "name" => "add cat"
+        ]);
 
-        factory(App\Cat::class, 50 )->create();
+        $permissions = [
+            'add benevole',
+            'add capture',
+            'add cat',
+        ];
+
+        $role->givePermissionTo($permissions);
+
+        factory(App\User::class, 200)->create()->each(
+            function (User $user) use ($role) {
+                $user->assignRole($role);
+            }
+        );
+
+        factory(App\Capture::class, 40)->create();
+
+        factory(App\Cat::class, 50)->create();
     }
 }
