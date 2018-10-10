@@ -36,23 +36,29 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;<li>
-                            <a href="{{ route('register') }}">
-                                Ajouter un bénévole
-                            </a>
-                        </li>
+                        @if(Auth::user()->can('add benevole'))
+                            <li>
+                                <a href="{{ route('register') }}">
+                                    Ajouter un bénévole
+                                </a>
+                            </li>
+                        @endif
 
-                        &nbsp;<li>
-                            <a href="{{ route('captures.create') }}">
-                                Ajouter une capture
-                            </a>
-                        </li>
+                        @if(Auth::user()->can('add capture'))
+                            &nbsp;<li>
+                                <a href="{{ route('captures.create') }}">
+                                    Ajouter une capture
+                                </a>
+                            </li>
+                        @endif
 
-                        <li>
-                            <a href="{{ route('cats.create') }}">
-                                Ajouter un chat
-                            </a>
-                        </li>
+                        @if(Auth::user()->can('add cat'))
+                            <li>
+                                <a href="{{ route('cats.create') }}">
+                                    Ajouter un chat
+                                </a>
+                            </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -7,7 +7,6 @@ use App\Http\Requests\CaptureStoreRequest;
 use App\Http\Requests\CaptureUpdateRequest;
 use App\User;
 use Illuminate\Http\Request;
-use Validator;
 
 class CaptureController extends Controller
 {
