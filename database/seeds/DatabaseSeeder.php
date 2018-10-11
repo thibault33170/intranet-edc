@@ -28,10 +28,25 @@ class DatabaseSeeder extends Seeder
             "name" => "add cat"
         ]);
 
+        Permission::create([
+            "name" => "display benevoles"
+        ]);
+
+        Permission::create([
+            "name" => "display captures"
+        ]);
+
+        Permission::create([
+            "name" => "display cats"
+        ]);
+
         $permissions = [
             'add benevole',
             'add capture',
             'add cat',
+            'display benevoles',
+            'display captures',
+            'display cats',
         ];
 
         $role->givePermissionTo($permissions);

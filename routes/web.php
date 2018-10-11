@@ -11,7 +11,8 @@ Route::group(['middleware' => 'auth'], function () {
      * Benevoles routes
      */
     Route::get('benevoles', 'BenevoleController@index')
-        ->name('benevoles.index');
+        ->name('benevoles.index')
+        ->middleware('benevole.index');
 
     Route::get('benevoles/create', 'BenevoleController@create')
         ->name('benevoles.create');
@@ -32,7 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
      * Capture routes
      */
     Route::get('captures', 'CaptureController@index')
-        ->name('captures.index');
+        ->name('captures.index')
+        ->middleware('capture.index');
 
     Route::get('captures/create', 'CaptureController@create')
         ->name('captures.create');
@@ -59,7 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
      * Cats routes
      */
     Route::get('cats', 'CatController@index')
-        ->name('cats.index');
+        ->name('cats.index')
+        ->middleware('cat.index');
 
     Route::get('cats/create', 'CatController@create')
         ->name('cats.create');
