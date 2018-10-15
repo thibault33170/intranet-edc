@@ -21,7 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('benevoles.store');
 
     Route::get('benevoles/{benevole}', 'BenevoleController@show')
-        ->name('benevoles.show');
+        ->name('benevoles.show')
+        ->middleware('benevole.show');
 
     Route::get('benevoles/{benevole}/edit', 'BenevoleController@edit')
         ->name('benevoles.edit');
@@ -43,7 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('captures.store');
 
     Route::get('captures/{capture}', 'CaptureController@show')
-        ->name('captures.show');
+        ->name('captures.show')
+        ->middleware('capture.show');
 
     Route::get('captures/{capture}/edit', 'CaptureController@edit')
         ->name('captures.edit');
@@ -71,7 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('cats.store');
 
     Route::get('cats/{cat}', 'CatController@show')
-        ->name('cats.show');
+        ->name('cats.show')
+        ->middleware('cat.show');
 
     Route::get('cats/{cat}/edit', 'CatController@edit')
         ->name('cats.edit');

@@ -3,8 +3,11 @@
 namespace App\Http;
 
 use App\Http\Middleware\benevole\CheckBenevoleIndex;
+use App\Http\Middleware\benevole\CheckBenevoleShow;
 use App\Http\Middleware\capture\CheckCaptureIndex;
+use App\Http\Middleware\capture\CheckCaptureShow;
 use App\Http\Middleware\cat\CheckCatIndex;
+use App\Http\Middleware\cat\CheckCatShow;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +66,8 @@ class Kernel extends HttpKernel
         'benevole.index' => CheckBenevoleIndex::class,
         'capture.index' => CheckCaptureIndex::class,
         'cat.index' => CheckCatIndex::class,
+        'benevole.show' => CheckBenevoleShow::class,
+        'capture.show' => CheckCaptureShow::class,
+        'cat.show' => CheckCatShow::class,
     ];
 }
