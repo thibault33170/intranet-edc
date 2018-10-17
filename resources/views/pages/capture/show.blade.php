@@ -32,10 +32,12 @@
         </div>
     </div>
 
-    <div class="row">
-        <a class="btn btn-primary text-center col-md-2 col-md-offset-5"
-           href="{{ route('captures.edit', $capture->id) }}">
-            Modifier la capture
-        </a>
-    </div>
+    @if(Auth::user()->can('edit capture'))
+        <div class="row">
+            <a class="btn btn-primary text-center col-md-2 col-md-offset-5"
+               href="{{ route('captures.edit', $capture->id) }}">
+                Modifier la capture
+            </a>
+        </div>
+    @endif
 @endsection

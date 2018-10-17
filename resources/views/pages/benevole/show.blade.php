@@ -30,11 +30,13 @@
         </div>
     </div>
 
-    <div class="row">
-        <a class="btn btn-primary text-center col-md-2 col-md-offset-5"
-           href="{{ route('benevoles.edit', $benevole->id) }}">
-            Modifier le Bénévole
-        </a>
-    </div>
+    @if ($benevole->can('edit benevole'))
+        <div class="row">
+            <a class="btn btn-primary text-center col-md-2 col-md-offset-5"
+               href="{{ route('benevoles.edit', $benevole->id) }}">
+                Modifier le Bénévole
+            </a>
+        </div>
+    @endif
 
 @endsection

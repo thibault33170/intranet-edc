@@ -25,10 +25,12 @@ Route::group(['middleware' => 'auth'], function () {
         ->middleware('benevole.show');
 
     Route::get('benevoles/{benevole}/edit', 'BenevoleController@edit')
-        ->name('benevoles.edit');
+        ->name('benevoles.edit')
+        ->middleware('benevole.edit');
 
     Route::put('benevoles/{benevole}', 'BenevoleController@update')
-        ->name('benevoles.update');
+        ->name('benevoles.update')
+        ->middleware('benevole.edit');
 
     /**
      * Capture routes
@@ -48,10 +50,12 @@ Route::group(['middleware' => 'auth'], function () {
         ->middleware('capture.show');
 
     Route::get('captures/{capture}/edit', 'CaptureController@edit')
-        ->name('captures.edit');
+        ->name('captures.edit')
+        ->middleware('capture.edit');
 
     Route::put('captures/{capture}', 'CaptureController@update')
-        ->name('captures.update');
+        ->name('captures.update')
+        ->middleware('capture.edit');
 
     Route::post('captures/attach', 'CaptureController@attach')
         ->name('captures.attach');
@@ -77,10 +81,12 @@ Route::group(['middleware' => 'auth'], function () {
         ->middleware('cat.show');
 
     Route::get('cats/{cat}/edit', 'CatController@edit')
-        ->name('cats.edit');
+        ->name('cats.edit')
+        ->middleware('cat.edit');
 
     Route::put('cats/{cat}', 'CatController@update')
-        ->name('cats.update');
+        ->name('cats.update')
+        ->middleware('cat.edit');
 
     Route::post('cats/attach', 'CatController@attach')
         ->name('cats.attach');

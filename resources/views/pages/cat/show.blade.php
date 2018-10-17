@@ -23,10 +23,12 @@
         </div>
     </div>
 
-    <div class="row">
-        <a class="btn btn-primary text-center col-md-2 col-md-offset-5"
-           href="{{ route('cats.edit', $cat->id) }}">
-            Modifier le chat
-        </a>
-    </div>
+    @if(Auth::user()->can('edit cat'))
+        <div class="row">
+            <a class="btn btn-primary text-center col-md-2 col-md-offset-5"
+               href="{{ route('cats.edit', $cat->id) }}">
+                Modifier le chat
+            </a>
+        </div>
+    @endif
 @endsection

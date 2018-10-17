@@ -2,10 +2,13 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\benevole\CheckBenevoleEdit;
 use App\Http\Middleware\benevole\CheckBenevoleIndex;
 use App\Http\Middleware\benevole\CheckBenevoleShow;
+use App\Http\Middleware\capture\CheckCaptureEdit;
 use App\Http\Middleware\capture\CheckCaptureIndex;
 use App\Http\Middleware\capture\CheckCaptureShow;
+use App\Http\Middleware\cat\CheckCatEdit;
 use App\Http\Middleware\cat\CheckCatIndex;
 use App\Http\Middleware\cat\CheckCatShow;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -69,5 +72,8 @@ class Kernel extends HttpKernel
         'benevole.show' => CheckBenevoleShow::class,
         'capture.show' => CheckCaptureShow::class,
         'cat.show' => CheckCatShow::class,
+        'benevole.edit' => CheckBenevoleEdit::class,
+        'capture.edit' => CheckCaptureEdit::class,
+        'cat.edit' => CheckCatEdit::class,
     ];
 }
