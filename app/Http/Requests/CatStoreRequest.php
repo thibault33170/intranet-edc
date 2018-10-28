@@ -24,7 +24,7 @@ class CatStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:cats',
             'color' => 'required',
             'dob' => 'required|date|date_format:Y-m-d|before:now',
         ];

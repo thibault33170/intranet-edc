@@ -80,7 +80,7 @@ class Capture extends Model
         return false;
     }
 
-    public function getFormatedStateAttribute($value) {
+    public function getFormatedStateAttribute() {
         switch ($this->state) {
             case self::STATE_TO_STUDY:
                 return "A étudier";

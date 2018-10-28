@@ -16,6 +16,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <h4><strong>État : </strong>{{ $cat->formatedState }}</h4>
                     <h4><strong>Couleur : </strong>{{ $cat->color }}</h4>
                     <h4><strong>Date de naissance : </strong>{{ $cat->dob->format('d-m-Y') }}</h4>
                 </div>

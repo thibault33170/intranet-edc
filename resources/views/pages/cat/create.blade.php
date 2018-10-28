@@ -21,6 +21,16 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="state">État</label>
+                    <select class="form-control" name="state" id="state">
+                        <option value="to reserve">A réserver</option>
+                        <option value="to adopt">A adopter</option>
+                        <option value="reserved">Réservé</option>
+                        <option value="adopted">Adopté</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="color">Couleur</label>
                     <input type="text" class="form-control" id="color" name="color" placeholder="Couleur">
                     <span class="help-block" style="color: red;">{{ $errors->first('color') }}</span>

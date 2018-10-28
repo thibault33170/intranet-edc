@@ -30,6 +30,22 @@
                 </div>
 
                 <div class="form-group">
+                    <select class="form-control" name="state" id="state">
+                        @foreach([
+                                \App\Cat::STATE_TO_RESERVE,
+                                \App\Cat::STATE_TO_ADOPT,
+                                \App\Cat::STATE_RESERVED,
+                                \App\Cat::STATE_ADOPTED,
+                            ] as $state
+                        )
+                            <option value="{{ $state }}" {{ $cat->state === $state ? 'selected' : '' }}>
+                                {{ $state }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="dob">Date</label>
                     <input type="date" class="form-control" id="dob" name="dob"
                            value="{{ $cat->dob->format('Y-m-d') }}" placeholder="Date de naissance">
