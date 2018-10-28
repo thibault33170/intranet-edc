@@ -25,6 +25,7 @@ class CatStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:cats',
+            'state' => 'required',
             'color' => 'required',
             'dob' => 'required|date|date_format:Y-m-d|before:now',
         ];
