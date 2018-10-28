@@ -62068,6 +62068,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -62076,12 +62103,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            search: ''
+            search: '',
+            state: null
         };
     },
 
 
     methods: {
+        match: function match(cat) {
+            console.log(this.state);
+            console.log(cat.state);
+            if (this.state && this.state !== cat.state) {
+                return false;
+            }
+
+            if (this.search === '') {
+                return cat;
+            }
+
+            return cat.name.toLowerCase().indexOf(this.search.toLowerCase()) >= 0;
+        },
+
         formatedDate: function formatedDate(date) {
             var now = __WEBPACK_IMPORTED_MODULE_0_moment___default()();
             var current = __WEBPACK_IMPORTED_MODULE_0_moment___default()(date);
@@ -62095,9 +62137,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             return this.cats.filter(function (cat) {
-                if (_this.search === '') return cat;
-
-                return cat.name.toLowerCase().indexOf(_this.search.toLowerCase()) >= 0;
+                if (_this.match(cat)) {
+                    return cat;
+                }
             });
         }
     }
@@ -62136,6 +62178,138 @@ var render = function() {
               }
             }
           })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6 col-md-offset-3" }, [
+        _c("div", { staticClass: "form-inline text-center" }, [
+          _c(
+            "div",
+            { staticClass: "form-group", staticStyle: { margin: "20px" } },
+            [
+              _c("label", { attrs: { for: "toAdopt" } }, [_vm._v("A adopter")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.state,
+                    expression: "state"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  id: "toAdopt",
+                  value: "to adopt",
+                  name: "state"
+                },
+                domProps: { checked: _vm._q(_vm.state, "to adopt") },
+                on: {
+                  change: function($event) {
+                    _vm.state = "to adopt"
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group", staticStyle: { margin: "20px" } },
+            [
+              _c("label", { attrs: { for: "toReserve" } }, [
+                _vm._v("A réserver")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.state,
+                    expression: "state"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  id: "toReserve",
+                  value: "to reserve",
+                  name: "state"
+                },
+                domProps: { checked: _vm._q(_vm.state, "to reserve") },
+                on: {
+                  change: function($event) {
+                    _vm.state = "to reserve"
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group", staticStyle: { margin: "20px" } },
+            [
+              _c("label", { attrs: { for: "adopted" } }, [_vm._v("Adopté")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.state,
+                    expression: "state"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  id: "adopted",
+                  value: "adopted",
+                  name: "state"
+                },
+                domProps: { checked: _vm._q(_vm.state, "adopted") },
+                on: {
+                  change: function($event) {
+                    _vm.state = "adopted"
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group", staticStyle: { margin: "20px" } },
+            [
+              _c("label", { attrs: { for: "reserved" } }, [_vm._v("Réservé")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.state,
+                    expression: "state"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  id: "reserved",
+                  value: "reserved",
+                  name: "state"
+                },
+                domProps: { checked: _vm._q(_vm.state, "reserved") },
+                on: {
+                  change: function($event) {
+                    _vm.state = "reserved"
+                  }
+                }
+              })
+            ]
+          )
         ])
       ])
     ]),

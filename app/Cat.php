@@ -32,5 +32,6 @@ class Cat extends Model
         'name',
         'color',
         'dob',
+        'state'
     ];
 }

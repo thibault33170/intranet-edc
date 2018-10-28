@@ -16,6 +16,7 @@ class CreateCatsTable extends Migration
         Schema::create('cats', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->enum('state', ['to reserve', 'reserved', 'to adopt', 'adopted']);
             $table->date('dob');
             $table->string('color');
 
