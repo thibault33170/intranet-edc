@@ -40,7 +40,7 @@ class BenevoleController extends Controller
      * @return Response
      */
     public function show($id) {
-        $benevole = $this->user->find($id);
+        $benevole = $this->user->findOrFail($id);
 
         return view('pages.benevole.show')->with('benevole', $benevole);
     }
@@ -52,7 +52,7 @@ class BenevoleController extends Controller
      * @return Response
      */
     public function edit($id) {
-        $benevole = $this->user->find($id);
+        $benevole = $this->user->findOrFail($id);
 
         return view('pages.benevole.edit')->with('benevole', $benevole);
     }
@@ -65,7 +65,7 @@ class BenevoleController extends Controller
      * @return RedirectResponse
      */
     public function update($id, BenevoleUpdateRequest $request) {
-        $this->user->find($id)->update($request->all());
+        $this->user->findOrFail($id)->update($request->all());
 
         return redirect()->route('benevoles.show', array($id))->with('status', 'Bénévole mis à jour');
     }

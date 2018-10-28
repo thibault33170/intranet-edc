@@ -61,7 +61,7 @@ class CatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $cat = $this->cat->find($id);
+        $cat = $this->cat->findOrFail($id);
 
         return view('pages.cat.show')->with('cat', $cat);
     }
@@ -73,7 +73,7 @@ class CatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $cat = $this->cat->find($id);
+        $cat = $this->cat->findOrFail($id);
 
         return view('pages.cat.edit')
             ->with('cat', $cat);
@@ -87,7 +87,7 @@ class CatController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id, CatUpdateRequest $request) {
-        $this->cat->find($id)->update($request->all());
+        $this->cat->findOrFail($id)->update($request->all());
 
         return redirect()->route('cats.show', array($id));
     }

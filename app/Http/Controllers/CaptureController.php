@@ -69,7 +69,7 @@ class CaptureController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $capture = $this->capture->find($id);
+        $capture = $this->capture->findOrFail($id);
 
         return view('pages.capture.show')->with('capture', $capture);
     }
@@ -81,7 +81,7 @@ class CaptureController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $capture = $this->capture->find($id);
+        $capture = $this->capture->findOrFail($id);
         $benevoles = $this->user->all();
 
         return view('pages.capture.edit')
@@ -97,13 +97,13 @@ class CaptureController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id, CaptureUpdateRequest $request) {
-        $this->capture->find($id)->update($request->all());
+        $this->capture->findOrFail($id)->update($request->all());
 
         return redirect()->route('captures.show', array($id));
     }
 
     public function attach(Request $request) {
-        $capture = $this->capture->find($request->input('capture_id'));
+        $capture = $this->capture->findOrFail($request->input('capture_id'));
 
         $capture->users()->attach($request->input('user_id'));
 
@@ -111,7 +111,7 @@ class CaptureController extends Controller
     }
 
     public function detach(Request $request) {
-        $capture = $this->capture->find($request->input('capture_id'));
+        $capture = $this->capture->findOrFail($request->input('capture_id'));
 
         $capture->users()->detach($request->input('user_id'));
 
