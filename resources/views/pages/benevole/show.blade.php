@@ -39,4 +39,24 @@
         </div>
     @endif
 
+    <div class="row" style="margin-top: 20px;">
+        @if(count($benevole->captures->where('state', '=', 'in process'))>0)
+            <h1 class="text-center center-block">Captures en cours</h1>
+        @endif
+        @foreach($benevole->captures as $capture)
+            @if($capture->state == 'in process')
+                <a style="text-decoration: none; color: grey" href="{{ route('captures.show', $capture->id)}}">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body text-center">
+                                <h1>{{ $capture->city }}</h1>
+                                <h5>{{ $capture->address}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endif
+        @endforeach
+    </div>
+
 @endsection
