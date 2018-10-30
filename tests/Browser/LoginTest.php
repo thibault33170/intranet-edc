@@ -12,8 +12,7 @@ use Tests\DuskTestCase;
 class LoginTest extends DuskTestCase
 {
     use DatabaseMigrations;
-//    use RefreshDatabase;
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * A Dusk test example.
