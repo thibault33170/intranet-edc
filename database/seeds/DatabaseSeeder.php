@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -16,53 +15,77 @@ class DatabaseSeeder extends Seeder
         /** @var Role $role */
         $role = Role::create(['name' => 'admin']);
 
-        Permission::create([
-            "name" => "add benevole"
-        ]);
+        Permission::create(
+            [
+                "name" => "add benevole",
+            ]
+        );
 
-        Permission::create([
-            "name" => "add capture"
-        ]);
+        Permission::create(
+            [
+                "name" => "add capture",
+            ]
+        );
 
-        Permission::create([
-            "name" => "add cat"
-        ]);
+        Permission::create(
+            [
+                "name" => "add cat",
+            ]
+        );
 
-        Permission::create([
-            "name" => "display benevoles"
-        ]);
+        Permission::create(
+            [
+                "name" => "display benevoles",
+            ]
+        );
 
-        Permission::create([
-            "name" => "display captures"
-        ]);
+        Permission::create(
+            [
+                "name" => "display captures",
+            ]
+        );
 
-        Permission::create([
-            "name" => "display cats"
-        ]);
+        Permission::create(
+            [
+                "name" => "display cats",
+            ]
+        );
 
-        Permission::create([
-            "name" => "show benevoles"
-        ]);
+        Permission::create(
+            [
+                "name" => "show benevoles",
+            ]
+        );
 
-        Permission::create([
-            "name" => "show captures"
-        ]);
+        Permission::create(
+            [
+                "name" => "show captures",
+            ]
+        );
 
-        Permission::create([
-            "name" => "show cats"
-        ]);
+        Permission::create(
+            [
+                "name" => "show cats",
+            ]
+        );
 
-        Permission::create([
-            "name" => "edit benevole"
-        ]);
+        Permission::create(
+            [
+                "name" => "edit benevole",
+            ]
+        );
 
-        Permission::create([
-            "name" => "edit capture"
-        ]);
+        Permission::create(
+            [
+                "name" => "edit capture",
+            ]
+        );
 
-        Permission::create([
-            "name" => "edit cat"
-        ]);
+        Permission::create(
+            [
+                "name" => "edit cat",
+            ]
+        );
 
         $permissions = [
             'add benevole',
@@ -81,13 +104,26 @@ class DatabaseSeeder extends Seeder
 
         $role->givePermissionTo($permissions);
 
-        factory(App\User::class, 200)->create()->each(
-            function (User $user) use ($role) {
+        /** @var \Illuminate\Database\Eloquent\Collection $users */
+        $users = factory(App\User::class, 50)->create()->each(
+            function (App\User $user) use ($role) {
                 $user->assignRole($role);
             }
         );
 
-        factory(App\Capture::class, 40)->create();
+        factory(App\Capture::class, 40)->create()->each(
+            function (App\Capture $capture) use ($users) {
+                $random = rand(0, 10);
+
+                $sample = $users->random($random);
+
+                $sample->each(
+                    function (App\User $user) use($capture){
+                        $capture->users()->attach($user->id);
+                    }
+                );
+            }
+        );
 
         factory(App\Cat::class, 50)->create();
     }

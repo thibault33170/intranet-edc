@@ -41,7 +41,9 @@
 
     <div class="row" style="margin-top: 20px;">
         @if(count($benevole->captures->where('state', '=', 'in process'))>0)
-            <h1 class="text-center center-block">Captures en cours</h1>
+            <h1 class="text-center center-block">
+                Captures en cours (<b>{{ count($benevole->captures->where('state', '=', 'in process')) }}</b>)
+            </h1>
         @endif
         @foreach($benevole->captures as $capture)
             @if($capture->state == 'in process')
